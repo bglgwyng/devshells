@@ -37,6 +37,13 @@
           ...
         }:
         {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [
+              (import inputs.rust-overlay)
+            ];
+          };
+
           devShells = {
             rust = pkgs.mkShell {
               nativeBuildInputs = [
